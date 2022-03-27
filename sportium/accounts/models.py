@@ -60,7 +60,7 @@ class Profile(models.Model):
         blank=True,
     )
 
-    information = models.TextField(
+    personal_information = models.TextField(
         null=True,
         blank=True,
     )
