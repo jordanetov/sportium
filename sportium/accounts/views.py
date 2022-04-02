@@ -1,9 +1,10 @@
 from django.contrib.auth import views as auth_views
-from django.shortcuts import render
+from django.contrib.auth import mixins as auth_mixins
 from django.urls import reverse_lazy
 from django.views import generic as views
 
 from sportium.accounts.forms import CreateProfileForm
+from sportium.accounts.models import Profile
 
 
 class UserRegisterView(views.CreateView):
@@ -25,3 +26,9 @@ class UserLoginView(auth_views.LoginView):
 class UserLogoutView(auth_views.LogoutView):
     def get_next_page(self):
         return reverse_lazy('login')
+
+
+class ProfileDetailsView(auth_mixins.LoginRequiredMixin, views.DetailView):
+    model = Profile
+    template_name = 'accounts/profile_details.html'
+    context_object_name = 'profile'

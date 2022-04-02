@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{#here we insert the specific block from base.html #}
+{% block page_content %}
+    <h1 class='text-center'>Clubs at Sportium</h1>
+    <div class="container mb-5">
+        <div class="row mb-5">
+
+            {% for club in clubs %}
+                <h1>{{ club.name }}</h1>
+                <div class="card ml-3 mb-3" style="width: 18rem;">
+                    <!-- Image -->
+                    <img src="{{ club.picture.url }}" alt="Club photo">
+                    <div class="card-body">
+                        <!-- First 30 chars from the description -->
+                        <p class="card-text">{{ club.information|truncatechars:25 }}</p>
+                        <!-- Button to the Photo Details Page -->
+                        <a href="" class="btn btn-primary">More</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
