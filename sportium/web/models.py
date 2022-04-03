@@ -1,6 +1,8 @@
 from django.core.validators import MinLengthValidator
 from django.db import models
 
+from sportium.common.helpers import UserModel
+
 
 class Club(models.Model):
     NAME_MAX_LEN = 16
@@ -57,8 +59,18 @@ class Player(models.Model):
 
     date_of_birth = models.DateField()
 
+    picture = models.URLField(
+        null=True,
+        blank=True,
+    )
+
     clubs = models.ManyToManyField(
         Club,
+    )
+
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.CASCADE,
     )
 
     date_time_of_joining = models.DateTimeField(

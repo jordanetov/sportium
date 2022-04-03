@@ -29,9 +29,13 @@
                         <h5><u>Description:</u> {{ profile.personal_information }}</h5>
                     {% endif %}
                 </div>
+                <p class="mt-2">Players registered: {{ players_count }}</p>
+                {% if players %}
+                    <a href="{% url 'players' request.user.id %}" class="btn btn-primary">More about the players</a>
+                {% endif %}
                 {% if is_owner %}
-                    {#                    <a href="{% url 'edit profile' %}" class="btn btn-primary">Edit</a>#}
-                    {#                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>#}
+                    <a href="{% url 'edit profile' request.user.id %}" class="btn btn-primary">Edit profile</a>
+                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>
                 {% endif %}
             </div>
         </div>

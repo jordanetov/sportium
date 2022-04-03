@@ -1,9 +1,8 @@
 from django import forms
-from django.contrib.auth import forms as auth_forms, get_user_model
+from django.contrib.auth import forms as auth_forms
 
 from sportium.accounts.models import Profile
-
-UserModel = get_user_model()
+from sportium.common.helpers import UserModel
 
 
 class CreateProfileForm(auth_forms.UserCreationForm):
@@ -64,3 +63,26 @@ class CreateProfileForm(auth_forms.UserCreationForm):
                 }
             ),
         }
+
+
+# class EditProfileForm(forms.ModelForm):
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         self.initial['gender'] = Profile.PREFER_NOT_TO_SAY
+#
+#     class Meta:
+#         model = Profile
+#         fields = '__all__'
+
+
+class DelProfileForm(forms.ModelForm):
+    def save(self, commit=True):
+        # players = self.instance.player_set_all()
+        # players.delete()
+        self.instance.delete()
+
+        return self.instance
+
+    class Meta:
+        model = Profile
+        fields = ()
