@@ -14,8 +14,8 @@
                         <!-- First 30 chars from the description -->
                         <p class="card-text">{{ club.information|truncatechars:25 }}</p>
                         <!-- Button to the Photo Details Page -->
-                        <a href="" class="btn btn-primary">More</a>
-                        <a href="" class="btn btn-primary">Sign up</a>
+                        <a href="{% url 'club info' club.id %}" class="btn btn-primary">More</a>
+                        <a href="{% url 'register player' %}" class="btn btn-primary">Sign up</a>
                     </div>
                 </div>
             {% endfor %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{#here we insert the specific block from base.html #}
+{% block page_content %}
+
+    <div class="row justify-content-center">
+        <div class="d-flex">
+            <div class="d-inline p-2 w-50">
+                <h5>{{ club.name }}</h5>
+                <img src="{{ club.picture }}"
+                     class="w-50 rounded mx-auto d-block" alt="description">
+            </div>
+            <div class="d-inline p-2 w-50">
+                <div class="d-flex flex-column">
+                    <h5><u>Sport:</u> {{ club.sport }}</h5>
+                    <h5><u>More:</u> {{ club.information }}</h5>
+                </div>
+{#                <p class="mt-2">Players registered: {{ players_count }}</p>#}
+                {% if players %}
+                    <a href="{% url 'players' request.id %}" class="btn btn-primary">More about the players</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

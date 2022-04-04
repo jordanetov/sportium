@@ -30,12 +30,13 @@
                     {% endif %}
                 </div>
                 <p class="mt-2">Players registered: {{ players_count }}</p>
+                <a href="{% url 'register player' %}" class="btn btn-primary">Register player</a>
                 {% if players %}
-                    <a href="{% url 'players' request.user.id %}" class="btn btn-primary">More about the players</a>
+                    <a href="{% url 'players' request.user.id %}" class="btn btn-primary">Players Info</a>
                 {% endif %}
                 {% if is_owner %}
                     <a href="{% url 'edit profile' request.user.id %}" class="btn btn-primary">Edit profile</a>
-                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'delete profile' %}" class="btn btn-danger">Delete profile</a>
                 {% endif %}
             </div>
         </div>
