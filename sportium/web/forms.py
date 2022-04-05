@@ -18,27 +18,40 @@ class RegisterPlayerForm(forms.ModelForm):
 
     class Meta:
         model = Player
-        fields = ('first_name', 'last_name', 'date_of_birth', 'picture', 'clubs',)
+        # fields = ('first_name', 'last_name', 'date_of_birth', 'picture', 'clubs',)
+        exclude = ('user',)
         widgets = {
             'first_name': forms.TextInput(
                 attrs={
-                    # if we don't do it via BootstrapFormMixin
-                    # 'class': 'form-control',
+                    'class': 'form-control',
                     'placeholder': 'Enter player first name',
                 }
             ),
             'last_name': forms.TextInput(
                 attrs={
-                    # if we don't do it via BootstrapFormMixin
-                    # 'class': 'form-control',
+                    'class': 'form-control',
                     'placeholder': 'Enter player last name',
                 }
             ),
             'date_of_birth': forms.TextInput(
                 attrs={
                     # if we don't do it via BootstrapFormMixin
-                    # 'class': 'form-control',
+                    'class': 'form-control',
                     'placeholder': 'Enter player date of birth',
                 }
             ),
         }
+
+
+class DelPlayerForm(forms.ModelForm):
+    def save(self, commit=True):
+        # players = self.instance.player_set_all()
+        # players.delete()
+        self.instance.delete()
+
+        return self.instance
+
+    class Meta:
+        model = Player
+        fields = ()
+

@@ -1,7 +1,9 @@
-from django.urls import reverse_lazy
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
-from sportium.web.forms import RegisterPlayerForm
+from sportium.web.forms import RegisterPlayerForm, DelPlayerForm
 from sportium.web.models import Club, Player
 
 
@@ -54,6 +56,7 @@ class PlayersView(views.ListView):
 
 
 class PLayerRegisterView(views.CreateView):
+    # user = Player.user
     template_name = 'web/register_player.html'
     form_class = RegisterPlayerForm
     success_url = reverse_lazy('clubs')
@@ -63,8 +66,28 @@ class PLayerRegisterView(views.CreateView):
             return self.success_url
         return super().get_success_url()
 
-    # we are giving the argument 'user' that we have put in the form (CreatePetForm)
+    # we are giving the argument 'user' that we have put in the form
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
         return kwargs
+
+
+def delete_player(request, pk):
+    user = request.user
+    player = Player.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = DelPlayerForm(request.POST, instance=player)
+        if form.is_valid():
+            form.save()
+            messages.info(request, 'The player has been deleted.')
+            return redirect('players', user.id)
+    else:
+        form = DelPlayerForm(instance=Player.objects.get(pk=pk))
+
+    context = {
+        'form': form,
+        'player': player,
+    }
+
+    return render(request, 'web/delete_player.html', context)

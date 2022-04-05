@@ -1,7 +1,7 @@
 from django.urls import path
 
 from sportium.web.views import HomeView, AboutView, ContactView, ClubsView, PlayersView, ClubDetailsView, \
-    PLayerRegisterView
+    PLayerRegisterView, delete_player
 
 urlpatterns = (
     path('', HomeView.as_view(), name='home'),
@@ -13,4 +13,5 @@ urlpatterns = (
 
     path('players/<int:pk>/', PlayersView.as_view(), name='players'),
     path('player/register/', PLayerRegisterView.as_view(), name='register player'),
+    path('player/delete/<int:pk>/', delete_player, name='delete player'),
 )

@@ -1,25 +1,29 @@
 {% extends 'base.html' %}
 {#here we insert the specific block from base.html #}
 {% block page_content %}
-    <h1 class='text-center'>List of players</h1>
-    <div class="container mb-5">
-        <div class="row mb-5">
-
-            {% for player in players %}
-                <h1>{{ player.first_name }} {{ player.last_name }}</h1>
-                <ul>
-                    <li>
-                        {% if player.picture %}
-                            <img src="{{ player.picture }}" alt="PLayer photo">
-                        {% endif %}
-                    </li>
-                    <li>Age: {{ player.age }}</li>
-                    <li>Date joined: {{ player.date_time_of_joining }}</li>
-                </ul>
-                {#                <li>#}
-                {#                    <p class="">{{ player.first_name }} takes part in {{ clubs_count }}</p>#}
-                {#                </li>#}
-                </div>
-            {% endfor %}
-    </div>
+    {% if players %}
+        <h1 class='text-center'>List of players</h1>
+        <div class="container mb-5">
+            <div class="row mb-5">
+                {% for player in players %}
+                    <h1>{{ player.first_name }} {{ player.last_name }}</h1>
+                    <ul>
+                        <li>
+                            {% if player.picture %}
+                                <img src="{{ player.picture }}" alt="PLayer photo">
+                            {% endif %}
+                        </li>
+                        <li>Age: {{ player.age }}</li>
+                        <li>Date joined: {{ player.date_time_of_joining }}</li>
+                    </ul>
+                    {#                <li>#}
+                    {#                    <p class="">{{ player.first_name }} takes part in {{ clubs_count }}</p>#}
+                    {#                </li>#}
+                    <a href="{% url 'delete player' player.id %}" class="btn btn-primary">Delete player</a>
+                    </div>
+                {% endfor %}
+        </div>
+    {% else %}
+        <h1 class='text-center'>No registered players yet.</h1>
+    {% endif %}
 {% endblock %}
