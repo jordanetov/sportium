@@ -1,5 +1,5 @@
 from django import forms
-from sportium.web.models import Player
+from sportium.web.models import Player, Contacts
 
 
 class RegisterPlayerForm(forms.ModelForm):
@@ -55,3 +55,28 @@ class DelPlayerForm(forms.ModelForm):
         model = Player
         fields = ()
 
+
+class ContactsForm(forms.ModelForm):
+    class Meta:
+        model = Contacts
+        fields = '__all__'
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Your name, please...',
+                    'class': 'form-control',
+                }
+            ),
+            'message': forms.Textarea(
+                attrs={
+                    'placeholder': 'Leave your message here...',
+                    'class': 'form-control',
+                }
+            ),
+            'email': forms.TextInput(
+                attrs={
+                    'placeholder': 'Where can we find you?',
+                    'class': 'form-control',
+                }
+            ),
+        }

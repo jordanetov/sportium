@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% block page_content %}
-    <div class=" col-md-5">
-        <h3>Contact us</h3>
-        <ul class="contac">
-            <li><i class="fa fa-map-marker" aria-hidden="true"></i>Address : Sofia <br>
-            </li>
-            <li><i class="fa fa-mobile" aria-hidden="true"></i> Phone : +31 626806160</li>
-            <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#">Email : sportium@email.com</a></li>
-        </ul>
-    </div>
+    <head>
+        <meta charset="UTF-8">
+        <title>Contact us!</title>
+    </head>
+    <body>
+    <form method="post" action="{% url "contacts" %}">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Send</button>
+    </form>
+    </body>
 {% endblock %}

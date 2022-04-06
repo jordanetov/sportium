@@ -1,10 +1,11 @@
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy, reverse
+from django.urls import reverse_lazy
 from django.views import generic as views
 
-from sportium.web.forms import RegisterPlayerForm, DelPlayerForm
-from sportium.web.models import Club, Player
+from sportium.web.forms import RegisterPlayerForm, DelPlayerForm, ContactsForm
+from sportium.web.models import Club, Player, Contacts
 
 
 class HomeView(views.TemplateView):
@@ -15,8 +16,15 @@ class AboutView(views.TemplateView):
     template_name = 'web/about_page.html'
 
 
-class ContactView(views.TemplateView):
+class ContactView(views.CreateView):
+    model = Contacts
+    form_class = ContactsForm
+    success_url = reverse_lazy('thanks')
     template_name = 'web/contacts.html'
+
+
+def thanks_view(request):
+    return render(request, 'web/thanks_message.html')
 
 
 class ClubsView(views.ListView):
@@ -62,6 +70,7 @@ class PLayerRegisterView(views.CreateView):
     success_url = reverse_lazy('clubs')
 
     def get_success_url(self):
+        # return reverse_lazy('profile details', kwargs={'pk': self.object.id})
         if self.success_url:
             return self.success_url
         return super().get_success_url()

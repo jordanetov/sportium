@@ -65,16 +65,6 @@ class CreateProfileForm(auth_forms.UserCreationForm):
         }
 
 
-# class EditProfileForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.initial['gender'] = Profile.PREFER_NOT_TO_SAY
-#
-#     class Meta:
-#         model = Profile
-#         fields = '__all__'
-
-
 class DelProfileForm(forms.ModelForm):
     def save(self, commit=True):
         # players = self.instance.player_set_all()

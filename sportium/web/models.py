@@ -89,3 +89,21 @@ class Player(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+class Contacts(models.Model):
+    NAME_MAX_LEN = 16
+    MESSAGE_MAX_LEN = 300
+
+    name = models.CharField(
+        max_length=NAME_MAX_LEN,
+    )
+
+    email = models.EmailField()
+
+    message = models.TextField(
+        max_length=MESSAGE_MAX_LEN,
+    )
+
+    def __str__(self):
+        return f'{self.name}'
