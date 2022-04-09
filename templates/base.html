@@ -3,12 +3,6 @@
 <html lang="en">
 <head>
     <!-- basic -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- mobile metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <!-- site metas -->
     <title>sportium</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
@@ -23,26 +17,12 @@
     <link rel="icon" type="image/png"
           href="https://img.icons8.com/color/344/track-and-field-skin-type-1-22.png">
 
-    {#        <link rel="icon" href="images/fevicon.png" type="image/gif"/>#}
-    <!-- Scrollbar Custom CSS -->
-    <link rel="stylesheet" href="/staticfiles/css/jquery.mCustomScrollbar.min.css">
-    <!-- Tweaks for older IEs-->
-    {#        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">#}
-    {#        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"#}
-    {#              media="screen">#}
-    {#        <link rel="stylesheet" href="https://rawgit.com/LeshikJanz/libraries/master/Bootstrap/baguetteBox.min.css">#}
-    {#        <!--[if lt IE 9]>#}
-    {#        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>#}
-    {#        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->#}
+    <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
 </head>
 <!-- body -->
 <body class="main-layout">
-<!-- loader  -->
-{#<div class="loader_bg">#}
-{#    <div class="loader"><img src="images/loading.gif" alt="#"/></div>#}
-{#</div>#}
-<!-- end loader -->
-<!-- header -->
 <header>
     <!-- header inner -->
     <div class="header">
@@ -80,12 +60,8 @@
                                 </li>
                                 {% if request.user.is_authenticated %}
                                     <li class="nav-item">
-                                        <a class="nav-link" href="">News</a>
+                                        <a class="nav-link" href="{% url 'events' %}">Events</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="">Gallery</a>
-                                    </li>
-
                                     <li class="nav-item">
                                         <a class="nav-link"
                                            href="{% url 'profile details' request.user.id %}">Profile</a>
@@ -123,24 +99,28 @@
     <div class="footer">
         <div class="container">
             <div class="row">
-                {#                <div class="col-md-3">#}
-                {#                    <h3>Link Menu</h3>#}
-                {#                    <ul class="link_menu">#}
-                {#                        <li><a href="{% url 'home' %}">Home</a></li>#}
-                {#                        <li><a href="{% url 'about' %}"> About</a></li>#}
-                {#                        <li><a href="#">Sports</a></li>#}
-                {#                        <li><a href="#">News</a></li>#}
-                {#                        <li><a href="#">Trainers</a></li>#}
-                {#                        <li><a href="#">Gallery</a></li>#}
-                {#                    </ul>#}
-                {#                </div>#}
+                <div class="col-md-3">
+                    <h3>Link Menu</h3>
+                    <ul class="link_menu">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}"> About</a></li>
+                        <li><a href="{% url 'clubs' %}">Clubs</a></li>
+                        {% if request.user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                            <li><a href="{% url 'register' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
                 <div class=" col-md-5">
-                    <h3>Contact US</h3>
+                    <h3>Contact us</h3>
                     <ul class="conta">
-                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>Address : Lorem Ipsum is <br>simply dummy
+                        <li><i class="fa fa-map-marker" aria-hidden="true"></i>Velingrad, Vela Peeva 1 str., 4644
                         </li>
-                        <li><i class="fa fa-mobile" aria-hidden="true"></i> Phone : +(1234) 567 890</li>
-                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="#">Email : demo@gmail.com</a></li>
+                        <li><i class="fa fa-mobile" aria-hidden="true"></i>+359 893612366</li>
+                        <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="{% url 'contacts' %}">sportium@mail.com</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -149,8 +129,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 offset-md-1">
-                        <p>© 2022 All Rights Reserved. Design by <a href="">jordan</a>
-                        </p>
+                        <p>© 2022 All Rights Reserved</p>
                     </div>
                 </div>
             </div>
@@ -158,16 +137,5 @@
     </div>
 </footer>
 <!-- end footer -->
-<!-- Javascript files-->
-{#      <script src="js/jquery.min.js"></script>#}
-{#      <script src="js/bootstrap.bundle.min.js"></script>#}
-{#      <script src="js/jquery-3.0.0.min.js"></script>#}
-{#      <!-- sidebar -->#}
-{#      <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>#}
-{#      <script src="js/custom.js"></script>#}
-{#      <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>#}
-<script>
-    baguetteBox.run('.tz-gallery');
-</script>
 </body>
 </html>

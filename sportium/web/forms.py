@@ -40,6 +40,21 @@ class RegisterPlayerForm(forms.ModelForm):
                     'placeholder': 'Enter player date of birth',
                 }
             ),
+            'picture': forms.TextInput(
+                attrs={
+                    # if we don't do it via BootstrapFormMixin
+                    'class': 'form-control',
+                    'placeholder': 'Enter picture URL',
+
+                }
+            ),
+            # 'clubs': forms.TextInput(
+            #     # widget=forms.ChoiceField(choices=Player.clubs),
+            #     attrs={
+            #         # if we don't do it via BootstrapFormMixin
+            #         'class': 'form-control',
+            #     }
+            # ),
         }
 
 

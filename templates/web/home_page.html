@@ -1,51 +1,85 @@
 {% extends 'base.html' %}
 
 {% block page_content %}
-    <!-- banner -->
-    <section class="banner_main">
-        <div id="myCarousel" class="carousel slide banner" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="first-slide" src="" alt="First slide">
-                    <div class="container">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="second-slide" src="" alt="Second slide">
-                </div>
-                <div class="carousel-item">
-                    <img class="third-slide" src="" alt="Third slide">
-                </div>
+    <head>
+        <title>Sportium</title>
+    </head>
+
+    <body>
+
+    <h1>Welcome to Sportium</h1>
+    <p>Here we take care of your physical and mental heath. You can enjoy different sports within our excellent
+        facilities.</p>
+
+    <br>
+    <br>
+
+    <div>
+        <div class="card ml-3 mb-3" style="width: 25rem;">
+            <!-- Image -->
+            <img src="https://static.dezeen.com/uploads/2016/08/olympiastadion-berlin-werner-march-1936-olympics_dezeen_sq-852x852.jpg"
+                 alt="football_athletics photo">
+            <div class="card-body">
+                <!-- First 30 chars from the description -->
+                <h3>Sportium Football and Athletics stadium</h3>
+                <p class="card-text">With a capacity of 40 000 people the stadium
+                    has hosted many big events including European Athletics tournament, many football games of the
+                    Bulgarian
+                    national teams and Champions league semi-final games. </p>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'register player' %}" class="btn btn-primary">Sign up</a>
+                {% endif %}
             </div>
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                <span class="sr-only">Next</span>
-            </a>
         </div>
-{#        <div class="banner_text">#}
-{#            <div class="container">#}
-{#                <div class="row">#}
-{#                    <div class="col-md-10">#}
-{#                        <div class="stewart">#}
-{#                            <span>construction</span>#}
-{#                            <h1>Welcome to your sports heaven</h1>#}
-{#                            <p>We care of your physical and mental health. We always strive to improve and deliver#}
-{#                                excellence.</p>#}
-{#                            <a class="read_more" href="">Contact us</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-    </section>
-    <!-- end banner -->
+
+        <div class="card ml-3 mb-3" style="width: 25rem;">
+            <!-- Image -->
+            <img src="https://i.guim.co.uk/img/media/e1c6e494033c6085956245f97a9475f990ee32ac/0_115_5316_3188/master/5316.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=fd865da713b92a291f3a9eb3bc588024"
+                 alt="swimming_hall photo">
+            <div class="card-body">
+                <!-- First 30 chars from the description -->
+                <h3>Sportium Swimming Hall</h3>
+                <p class="card-text">The swimming area of Sportium is a home of swimming clubs in all different age
+                    categories. It's also possible to sign up for a free swimming visits as well as for a personalized
+                    training lessons.</p>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'register player' %}" class="btn btn-primary">Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card ml-3 mb-3" style="width: 25rem;">
+            <!-- Image -->
+            <img src="https://tennishead.net/wp-content/uploads/2021/04/10_Ariake_Tennis_Park_2020.jpeg"
+                 alt="tennis_park photo">
+            <div class="card-body">
+                <!-- First 30 chars from the description -->
+                <h3>Sportium Tennis Club</h3>
+                <p class="card-text">Tennis Club Sportium consists of 6 courts with hard surface. There is an academy
+                    for kids from age of 6. The club is a host of one of the Sportium ATP 500 tournament.</p>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'register player' %}" class="btn btn-primary">Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card ml-3 mb-3" style="width: 25rem;">
+            <!-- Image -->
+            <img src="https://www.fivb.org/EN/volleyball/competitions/WorldLeague/2012/img/ArenaArmeets_inside.jpg"
+                 alt="volleyball_hall photo">
+            <div class="card-body">
+                <!-- First 30 chars from the description -->
+                <h3>Arena Sportium</h3>
+                <p class="card-text">Sportium is happy to have a multifunctional sports hall which ia a home to our
+                    Volleyball team. Here we have seen big events in other sport disciplines such as gymnastics,
+                    basketball, tennis and futsal. You can also visit the arena for the concerts of many famous music
+                    artists.</p>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'register player' %}" class="btn btn-primary">Sign up</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    </body>
 {% endblock %}

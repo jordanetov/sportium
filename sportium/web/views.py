@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.views import generic as views
 
 from sportium.web.forms import RegisterPlayerForm, DelPlayerForm, ContactsForm
-from sportium.web.models import Club, Player, Contacts
+from sportium.web.models import Club, Player, Contacts, Event
 
 
 class HomeView(views.TemplateView):
@@ -100,3 +100,9 @@ def delete_player(request, pk):
     }
 
     return render(request, 'web/delete_player.html', context)
+
+
+class EventsView(views.ListView):
+    model = Event
+    template_name = 'web/events.html'
+    context_object_name = 'events'

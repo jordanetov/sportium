@@ -6,8 +6,8 @@
         <div class="row mb-5">
 
             {% for club in clubs %}
-                <h1>{{ club.name }}</h1>
                 <div class="card ml-3 mb-3" style="width: 18rem;">
+                    <h1>{{ club.name }}</h1>
                     <!-- Image -->
                     <img src="{{ club.picture.url }}" alt="Club photo">
                     <div class="card-body">

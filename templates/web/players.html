@@ -6,8 +6,8 @@
         <div class="container mb-5">
             <div class="row mb-5">
                 {% for player in players %}
-                    <h1>{{ player.first_name }} {{ player.last_name }}</h1>
                     <ul>
+                        <li><h1>{{ player.first_name }} {{ player.last_name }}</h1></li>
                         <li>
                             {% if player.picture %}
                                 <img src="{{ player.picture }}" alt="PLayer photo">
@@ -15,11 +15,9 @@
                         </li>
                         <li>Age: {{ player.age }}</li>
                         <li>Date joined: {{ player.date_time_of_joining }}</li>
+                        <li><a href="{% url 'delete player' player.id %}" class="btn btn-primary">Delete player</a>
+                        </li>
                     </ul>
-                    {#                <li>#}
-                    {#                    <p class="">{{ player.first_name }} takes part in {{ clubs_count }}</p>#}
-                    {#                </li>#}
-                    <a href="{% url 'delete player' player.id %}" class="btn btn-primary">Delete player</a>
                     </div>
                 {% endfor %}
         </div>

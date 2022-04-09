@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.validators import MinLengthValidator
 from django.db import models
 
@@ -104,6 +106,46 @@ class Contacts(models.Model):
     message = models.TextField(
         max_length=MESSAGE_MAX_LEN,
     )
+
+    def __str__(self):
+        return f'{self.name}'
+
+
+class Event(models.Model):
+    NAME_MAX_LEN = 30
+
+    GAME = 'Game'
+    CELEBRATION = 'Celebration'
+    TOURNAMENT = 'Tournament'
+    MEETING = 'Meet the team'
+
+    SPORTS_HALL = 'Arena Sportium'
+    CEREMONY_HALL = 'Ceremony hall - Arena Sportium'
+    GARDEN = 'The garden next to Sportium Stadium'
+    STADIUM = 'Sportium Stadium'
+    TENNIS_CLUB = 'Tennis club Sportium'
+    SWIMMING_POOL = 'Swimming pool Sportium'
+
+    EVENT_TYPES = [(t, t) for t in (GAME, CELEBRATION, TOURNAMENT, MEETING)]
+    LOCATIONS = [(l, l) for l in (SPORTS_HALL, CEREMONY_HALL, GARDEN, STADIUM, TENNIS_CLUB, SWIMMING_POOL)]
+
+    name = models.CharField(
+        max_length=NAME_MAX_LEN,
+    )
+
+    type = models.CharField(
+        max_length=max(len(t) for t, _ in EVENT_TYPES),
+        choices=EVENT_TYPES,
+    )
+
+    day_time = models.DateTimeField(default=datetime.now())
+
+    location = models.CharField(
+        max_length=max(len(l) for l, _ in LOCATIONS),
+        choices=LOCATIONS,
+    )
+
+    information = models.TextField()
 
     def __str__(self):
         return f'{self.name}'
