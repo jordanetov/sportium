@@ -8,6 +8,14 @@ from sportium.web.forms import RegisterPlayerForm, DelPlayerForm, ContactsForm
 from sportium.web.models import Club, Player, Contacts, Event
 
 
+def thanks_view(request):
+    return render(request, 'web/thanks_message.html')
+
+
+def no_permission_view(request):
+    return render(request, 'web/no_permission.html')
+
+
 class HomeView(views.TemplateView):
     template_name = 'web/home_page.html'
 
@@ -21,10 +29,6 @@ class ContactView(views.CreateView):
     form_class = ContactsForm
     success_url = reverse_lazy('thanks')
     template_name = 'web/contacts.html'
-
-
-def thanks_view(request):
-    return render(request, 'web/thanks_message.html')
 
 
 class ClubsView(views.ListView):

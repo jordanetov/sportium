@@ -1,13 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import views as auth_views, authenticate, login
 from django.contrib.auth import mixins as auth_mixins
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views import generic as views
 
 from sportium.accounts.forms import CreateProfileForm, DelProfileForm
+from sportium.common.helpers import needed_permission
 from sportium.common.mixins import RedirectToHomeMixin
 from sportium.accounts.models import Profile
 from sportium.web.models import Player
@@ -76,7 +76,7 @@ class EditProfileView(views.UpdateView):
 #     template_name = 'accounts/delete_profile.html'
 #     success_url = reverse_lazy('home')
 
-@login_required
+@needed_permission(permission=['accounts.delete_profile'])
 def delete_user(request):
     user = request.user
     if request.method == 'POST':
