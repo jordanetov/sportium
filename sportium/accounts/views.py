@@ -27,7 +27,7 @@ class UserRegisterView(RedirectToHomeMixin, views.CreateView):
         return HttpResponseRedirect(reverse('home'))
 
 
-class UserLoginView(auth_views.LoginView):
+class UserLoginView(RedirectToHomeMixin, auth_views.LoginView):
     template_name = 'accounts/login.html'
     success_url = reverse_lazy('home')
 
@@ -70,11 +70,6 @@ class EditProfileView(views.UpdateView):
     def get_success_url(self):
         return reverse_lazy('profile details', kwargs={'pk': self.object.user_id})
 
-
-# class DelProfileView(views.DeleteView):
-#     model = Profile
-#     template_name = 'accounts/delete_profile.html'
-#     success_url = reverse_lazy('home')
 
 @needed_permission(permission=['accounts.delete_profile'])
 def delete_user(request):

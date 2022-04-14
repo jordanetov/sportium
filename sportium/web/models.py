@@ -4,6 +4,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 from sportium.common.helpers import UserModel
+from sportium.common.validators import validate_only_letters
 
 
 class Club(models.Model):
@@ -49,6 +50,7 @@ class Player(models.Model):
         max_length=FIRST_NAME_MAX_LEN,
         validators=(
             MinLengthValidator(FIRST_NAME_MIN_LEN),
+            validate_only_letters,
         )
     )
 
@@ -56,6 +58,7 @@ class Player(models.Model):
         max_length=LAST_NAME_MAX_LEN,
         validators=(
             MinLengthValidator(LAST_NAME_MIN_LEN),
+            validate_only_letters,
         )
     )
 
@@ -126,8 +129,18 @@ class Event(models.Model):
     TENNIS_CLUB = 'Tennis club Sportium'
     SWIMMING_POOL = 'Swimming pool Sportium'
 
+    MONDAY_EVENING = 'Monday at 19:00'
+    WEDNESDAY_NOON = 'Wednesday at 12:00'
+    WEDNESDAY_EVENING = 'Wednesday at 19:00'
+    FRIDAY_EVENING = 'Friday at 19:00'
+    WEEKEND_MORNING = 'Saturday at 10:00'
+    SATURDAY_GAME = 'Saturday at 20:00'
+    SUNDAY_GAME = 'Sunday at 20:00'
+
     EVENT_TYPES = [(t, t) for t in (GAME, CELEBRATION, TOURNAMENT, MEETING)]
     LOCATIONS = [(l, l) for l in (SPORTS_HALL, CEREMONY_HALL, GARDEN, STADIUM, TENNIS_CLUB, SWIMMING_POOL)]
+    DAY_TIME_OPTIONS = [(o, o) for o in (
+        MONDAY_EVENING, WEDNESDAY_NOON, WEDNESDAY_EVENING, FRIDAY_EVENING, WEEKEND_MORNING, SATURDAY_GAME, SUNDAY_GAME)]
 
     name = models.CharField(
         max_length=NAME_MAX_LEN,
@@ -138,7 +151,10 @@ class Event(models.Model):
         choices=EVENT_TYPES,
     )
 
-    day_time = models.DateTimeField(default=datetime.now())
+    day_and_time = models.CharField(
+        max_length=max(len(o) for o, _ in DAY_TIME_OPTIONS),
+        choices=DAY_TIME_OPTIONS,
+    )
 
     location = models.CharField(
         max_length=max(len(l) for l, _ in LOCATIONS),

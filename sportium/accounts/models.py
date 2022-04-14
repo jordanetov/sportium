@@ -43,7 +43,6 @@ class Profile(models.Model):
         max_length=FIRST_NAME_MAX_LENGTH,
         validators=(
             MinLengthValidator(FIRST_NAME_MIN_LENGTH),
-            # todo: validate only letters
         )
     )
 
@@ -51,7 +50,6 @@ class Profile(models.Model):
         max_length=LAST_NAME_MAX_LENGTH,
         validators=(
             MinLengthValidator(LAST_NAME_MIN_LENGTH),
-            # todo: validate only letters
         )
     )
 
@@ -67,10 +65,7 @@ class Profile(models.Model):
 
     picture = models.URLField()
 
-    email = models.EmailField(
-        # null=True,
-        # blank=True,
-    )
+    email = models.EmailField()
 
     gender = models.CharField(
         max_length=max(len(g) for g, _ in GENDERS),
@@ -82,6 +77,13 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
+
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
+    class Meta:
+        unique_together = ('first_name', 'last_name')
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

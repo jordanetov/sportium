@@ -2,10 +2,10 @@ from django import forms
 from django.contrib.auth import forms as auth_forms
 
 from sportium.accounts.models import Profile
-from sportium.common.helpers import UserModel
+from sportium.common.helpers import UserModel, BootstrapFormMixin
 
 
-class CreateProfileForm(auth_forms.UserCreationForm):
+class CreateProfileForm(BootstrapFormMixin, auth_forms.UserCreationForm):
     first_name = forms.CharField(
         max_length=Profile.FIRST_NAME_MAX_LENGTH,
     )
@@ -51,61 +51,43 @@ class CreateProfileForm(auth_forms.UserCreationForm):
         fields = ('username', 'password1', 'password2', 'first_name', 'last_name', 'gender', 'date_of_birth',
                   'personal_information', 'picture')
 
-        # widgets = {
-        #     'username': forms.TextInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'placeholder': 'Enter username',
-        #         }
-        #     ),
-        #     'password1': forms.TextInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'placeholder': 'Enter your password',
-        #         }
-        #     ),
-        #     'password2': forms.PasswordInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'placeholder': 'Confirm your password',
-        #         }
-        #     ),
-        #     'first_name': forms.TextInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'placeholder': 'Enter first name',
-        #         }
-        #     ),
-        #     'last_name': forms.TextInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'placeholder': 'Enter last name',
-        #         }
-        #     ),
-        #     'gender': forms.TextInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #         }
-        #     ),
-        #     'date_of_birth': forms.DateInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #         }
-        #     ),
-        #     'personal_information': forms.Textarea(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'rows': 3,
-        #         }
-        #     ),
-        #     'picture': forms.TextInput(
-        #         attrs={
-        #             'class': 'form-control',
-        #             'placeholder': 'Enter picture URL',
-        #         }
-        #     ),
-        #
-        # }
+        widgets = {
+            'username': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter username',
+                }
+            ),
+            'password1': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter your password',
+                }
+            ),
+            'password2': forms.TextInput(
+                attrs={
+                    'placeholder': 'Confirm your password',
+                }
+            ),
+            'first_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter first name',
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter last name',
+                }
+            ),
+            'personal_information': forms.Textarea(
+                attrs={
+                    'rows': 3,
+                }
+            ),
+            'picture': forms.TextInput(
+                attrs={
+                    'placeholder': 'Enter picture URL',
+                }
+            ),
+        }
 
 
 class DelProfileForm(forms.ModelForm):

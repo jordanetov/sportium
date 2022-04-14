@@ -41,7 +41,7 @@ THIRD_PARTY_APPS = ()
 
 PROJECT_APPS = (
     'sportium.web',
-    'sportium.accounts'
+    'sportium.accounts',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
