@@ -56,7 +56,6 @@ class ProfileDetailsTests(TestCase):
 
         return player
 
-
     def test_when_opening_not_existing_profile__expect_404_actual_302(self):
         response = self.client.get(reverse('profile details', kwargs={
             'pk': 141315,
